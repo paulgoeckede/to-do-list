@@ -1,0 +1,32 @@
+{
+    "name": "to-do-list",
+    "version": "1.0.0",
+    "description": "The Odin Project // To-Do List Project",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack",
+        "start": "webpack serve --open"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/paulgoeckede/to-do-list.git"
+    },
+    "author": "Paul Goeckede",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/paulgoeckede/to-do-list/issues"
+    },
+    "homepage": "https://github.com/paulgoeckede/to-do-list#readme",
+    "devDependencies": {
+        "css-loader": "^6.5.1",
+        "html-webpack-plugin": "^5.5.0",
+        "style-loader": "^3.3.1",
+        "webpack": "^5.68.0",
+        "webpack-cli": "^4.9.2",
+        "webpack-dev-server": "^4.7.3"
+    },
+    "dependencies": {
+        "html-loader": "^3.1.0"
+    }
+}
