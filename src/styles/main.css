@@ -1,0 +1,101 @@
+#main {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#appContainer {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 20px;
+    height: 90%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#appHeader {
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.line {
+    height: 1px;
+    width: 200px;
+    border: 1px solid black;
+}
+
+#projectHeader {
+    letter-spacing: 3px;
+}
+
+#add {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+input[type="text"] {
+    width: 40%; /* Full width */
+    padding: 12px; /* Some padding */
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+input[type="button"] {
+    border-radius: 5px;
+    border-style: none;
+    background-color: transparent;
+    border: 2px solid #50514f;
+    font-family: "Poppins";
+    padding: 10px 20px;
+    transition: border 0.1s;
+}
+
+input[type="button"]:hover {
+    border: 2px solid midnightblue;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+#todolist {
+    height: 70%;
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#sortby {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#sortby p {
+    margin: 10px;
+    font-size: 14px;
+    color: #766d6d;
+    font-style: italic;
+}
+
+#sortby p:hover {
+    cursor: pointer;
+}
+
+#tasks {
+    width: 90%;
+    height: fit-content;
+}

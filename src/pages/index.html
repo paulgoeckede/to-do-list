@@ -6,6 +6,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
-        <p>this is a test</p>
+        <div id="content">
+            <div id="sidebar">
+                <div id="headerContainer">
+                    <h2>Project Overview</h2>
+                </div>
+                <div id="projects">
+                    <ul id="projectList">
+                        <li><h4>Default Project</h4></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="main">
+                <div id="appContainer">
+                    <div id="appHeader">
+                        <div class="line"></div>
+                        <div id="projectHeader"><h1>Default Project</h1></div>
+                        <div class="line"></div>
+                    </div>
+                    <div id="add">
+                        <input
+                            type="text"
+                            placeholder="Add a task"
+                            name="task"
+                            id="task"
+                        />
+                        <input type="button" value="Add to List" />
+                    </div>
+                    <div id="todolist">
+                        <div id="sortby"><p>Sort by...</p></div>
+                        <div id="tasks"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
