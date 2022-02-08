@@ -117,7 +117,7 @@ input[type="button"]:hover {
     gap: 10px;
 }
 
-#checkbox {
+.checkbox {
     width: 1.3em;
     height: 1.3em;
     background-color: white;
@@ -129,6 +129,6 @@ input[type="button"]:hover {
     cursor: pointer;
 }
 
-#checkbox:checked {
+.checkbox:checked {
     background-color: grey;
 }

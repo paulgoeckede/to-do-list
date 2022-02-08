@@ -4,5 +4,8 @@ import "./styles/main.css";
 import * as Todomanager from "./scripts/manage-todos";
 import * as Dommanager from "./scripts/dom-add-todo";
 
-Todomanager.start();
-Dommanager.start();
+Dommanager.addButton.addEventListener("click", () => {
+    const newTodo = Todomanager.addTodo();
+    Dommanager.appendTodo(newTodo);
+    Dommanager.taskInput.value = "";
+});
