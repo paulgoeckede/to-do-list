@@ -28,13 +28,4 @@ function appendTodo(todo) {
     tasksDiv.appendChild(newTodo);
 }
 
-/* function updateIndexes() {
-    const currentTodos = document.querySelectorAll(".todo");
-    const arr = Array.from(currentTodos);
-
-    arr.forEach((item, index) => {
-        item.setAttribute("data-index", `${index}`);
-    });
-} */
-
 export { appendTodo, addButton, taskInput, tasksDiv };
