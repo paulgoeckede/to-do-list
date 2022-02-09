@@ -25,3 +25,11 @@
     list-style: none;
     padding: 20px;
 }
+
+#newProject {
+    padding: 2px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    width: 80%;
+}

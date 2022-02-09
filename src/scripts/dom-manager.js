@@ -1,12 +1,15 @@
-import { removeTodo, save, todos } from "./manage-todos";
+import { removeTodo, todos } from "./manage-todos";
+import { getProjectById, projects, save } from "./project-manager";
 import Overlay from "./todo-overlay";
 
 const addButton = document.getElementById("addButton"); //Add to List Button
 const taskInput = document.getElementById("task"); //Text input of todo
 const tasksDiv = document.getElementById("tasks"); //container for all todos
+const headerContainer = document.getElementById("projectHeader");
+let currentProjectID = 0; //keeps track of the index number of the current project
 
-function parseExistingTodos() {
-    todos.forEach((item) => {
+function parseExistingTodos(id) {
+    getProjectById(id).todos.forEach((item) => {
         appendTodo(item);
     });
 }
@@ -25,7 +28,7 @@ function appendTodo(todo) {
 
     //Adds functionality to the checkboxes that the task gets deleted once checkbox is clicked
     todoCheckbox.addEventListener("click", () => {
-        removeTodo(
+        projects[currentProjectID].removeTodo(
             todoCheckbox.parentElement.parentElement.getAttribute("data-todoID")
         );
         todoCheckbox.parentElement.parentElement.remove();
@@ -65,6 +68,19 @@ function appendTodo(todo) {
     save();
 }
 
+function switchProjects(projectID) {
+    const newHeader = document.createElement("h1");
+    newHeader.innerHTML = getProjectById(projectID).name;
+    headerContainer.innerHTML = "";
+    headerContainer.appendChild(newHeader);
+    console.log(getProjectById(projectID));
+
+    currentProjectID = projectID;
+    tasksDiv.innerHTML = "";
+
+    parseExistingTodos(projectID);
+}
+
 //This Listens for when the user clicks outside of the card overlay and removes the overlay if he does
 function removeOverlayListener() {
     const overlay = document.getElementById("overlay");
@@ -76,4 +92,12 @@ function removeOverlayListener() {
     });
 }
 
-export { appendTodo, parseExistingTodos, addButton, taskInput, tasksDiv };
+export {
+    appendTodo,
+    parseExistingTodos,
+    switchProjects,
+    addButton,
+    taskInput,
+    tasksDiv,
+    currentProjectID,
+};

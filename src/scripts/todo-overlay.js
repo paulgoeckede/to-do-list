@@ -5,6 +5,8 @@ import {
     addChecklistItem,
     removeCheckListItem,
 } from "./manage-todos";
+import * as Projectmanager from "./project-manager";
+import { currentProjectID } from "./dom-manager";
 import { format } from "date-fns";
 
 export default function generateOverlay(todo) {
@@ -138,7 +140,11 @@ function managePriority(one, two, three, prio, id) {
             break;
     }
 
-    changePriority(id, priority); //This changes the priority attribute of the todo object
+    //This changes the priority attribute of the todo object
+    Projectmanager.getProjectById(currentProjectID).changePriority(
+        id,
+        priority
+    );
 }
 
 /* ------------------- Due Date ----------------------- */
@@ -164,7 +170,10 @@ function generateDueDate(todo) {
     //When the date is input/changed, it saves the date in the todo object and adds it to the todo item in the list view
     dateInput.addEventListener("input", () => {
         const date = new Date(dateInput.valueAsDate);
-        changeDue(todo.id, date); //change due date in todo object array
+        Projectmanager.getProjectById(currentProjectID).changeDue(
+            todo.id,
+            date
+        ); //change due date in todo object array
         document.querySelector(`[data-dateindex = "${todo.id}"]`).innerHTML =
             format(todo.due, "do MMM yyyy");
     });
@@ -195,7 +204,10 @@ function generateNotes(todo) {
     }
 
     notesText.addEventListener("input", () => {
-        changeNote(todo.id, notesText.value); //if note is input then save note in todo element
+        Projectmanager.getProjectById(currentProjectID).changeNote(
+            todo.id,
+            notesText.value
+        ); //if note is input then save note in todo element
     });
 
     return notesSection;
@@ -231,7 +243,10 @@ function generateChecklist(todo) {
         //This removes the DOM Item and the actual item from the checklist array in the todo object
         checkbox.addEventListener("click", () => {
             checkbox.parentElement.remove();
-            removeCheckListItem(todo.id, checkbox.nextElementSibling.innerHTML);
+            Projectmanager.getProjectById(currentProjectID).removeCheckListItem(
+                todo.id,
+                checkbox.nextElementSibling.innerHTML
+            );
         });
 
         const label = document.createElement("p");
@@ -246,7 +261,10 @@ function generateChecklist(todo) {
     //logic when a new checklist item is added
     newItem.addEventListener("keyup", (e) => {
         if (e.key === "Enter") {
-            addChecklistItem(todo.id, newItem.value);
+            Projectmanager.getProjectById(currentProjectID).addChecklistItem(
+                todo.id,
+                newItem.value
+            );
 
             const newLi = document.createElement("li");
             newLi.classList.add("checklistItem");
@@ -258,7 +276,9 @@ function generateChecklist(todo) {
             //This removes the DOM Item and the actual item from the checklist array in the todo object
             checkbox.addEventListener("click", () => {
                 checkbox.parentElement.remove();
-                removeCheckListItem(
+                Projectmanager.getProjectById(
+                    currentProjectID
+                ).removeCheckListItem(
                     todo.id,
                     checkbox.nextElementSibling.innerHTML
                 );
