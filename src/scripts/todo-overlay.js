@@ -1,10 +1,3 @@
-import {
-    changePriority,
-    changeDue,
-    changeNote,
-    addChecklistItem,
-    removeCheckListItem,
-} from "./manage-todos";
 import * as Projectmanager from "./project-manager";
 import { currentProjectID } from "./dom-manager";
 import { format } from "date-fns";

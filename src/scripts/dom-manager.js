@@ -1,6 +1,6 @@
-import { removeTodo, todos } from "./manage-todos";
 import { getProjectById, projects, save } from "./project-manager";
 import Overlay from "./todo-overlay";
+import { format } from "date-fns";
 
 const addButton = document.getElementById("addButton"); //Add to List Button
 const taskInput = document.getElementById("task"); //Text input of todo
@@ -44,6 +44,19 @@ function appendTodo(todo) {
     todoPriority.classList.add("todoPriority");
     todoPriority.setAttribute("data-priorityid", `${todo.id}`);
 
+    //Styles the small checkmark in list view accordingly if the items priority has already been set.
+    switch (todo.priority) {
+        case 1:
+            todoPriority.classList.add("cardPriorityOne");
+            break;
+        case 2:
+            todoPriority.classList.add("cardPriorityTwo");
+            break;
+        case 3:
+            todoPriority.classList.add("cardPriorityThree");
+            break;
+    }
+
     newTodo.addEventListener("click", (e) => {
         if (e.target.className !== "checkbox") {
             Overlay(todo);
@@ -56,6 +69,11 @@ function appendTodo(todo) {
     const datep = document.createElement("p");
     datep.classList.add("datep");
     datep.setAttribute("data-dateindex", `${todo.id}`);
+
+    if (todo.due) {
+        datep.innerHTML = format(todo.due, "do MMM yyyy");
+    }
+
     datecontainer.appendChild(datep);
 
     container.appendChild(todoCheckbox);
