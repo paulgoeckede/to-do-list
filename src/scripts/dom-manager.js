@@ -1,4 +1,10 @@
-import { getProjectById, projects, save } from "./project-manager";
+import {
+    getProjectById,
+    load,
+    projects,
+    removeProject,
+    save,
+} from "./project-manager";
 import Overlay from "./todo-overlay";
 import { format } from "date-fns";
 
@@ -6,7 +12,16 @@ const addButton = document.getElementById("addButton"); //Add to List Button
 const taskInput = document.getElementById("task"); //Text input of todo
 const tasksDiv = document.getElementById("tasks"); //container for all todos
 const headerContainer = document.getElementById("projectHeader");
+const main = document.querySelector("#main");
 let currentProjectID = 0; //keeps track of the index number of the current project
+
+function saveCurrentId() {
+    localStorage.setItem("currentProjectID", JSON.stringify(currentProjectID));
+}
+
+function loadCurrentId() {
+    currentProjectID = JSON.parse(localStorage.getItem("currentProjectID"));
+}
 
 function parseExistingTodos(id) {
     getProjectById(id).todos.forEach((item) => {
@@ -28,7 +43,7 @@ function appendTodo(todo) {
 
     //Adds functionality to the checkboxes that the task gets deleted once checkbox is clicked
     todoCheckbox.addEventListener("click", () => {
-        projects[currentProjectID].removeTodo(
+        getProjectById(currentProjectID).removeTodo(
             todoCheckbox.parentElement.parentElement.getAttribute("data-todoID")
         );
         todoCheckbox.parentElement.parentElement.remove();
@@ -71,7 +86,7 @@ function appendTodo(todo) {
     datep.setAttribute("data-dateindex", `${todo.id}`);
 
     if (todo.due) {
-        datep.innerHTML = format(todo.due, "do MMM yyyy");
+        datep.innerHTML = todo.due;
     }
 
     datecontainer.appendChild(datep);
@@ -97,6 +112,38 @@ function switchProjects(projectID) {
     tasksDiv.innerHTML = "";
 
     parseExistingTodos(projectID);
+    addRemoveButton(projectID);
+    saveCurrentId();
+}
+
+function addRemoveButton(projectID) {
+    if (!document.querySelector(`[data-btnid="${projectID}"]`)) {
+        if (document.querySelector(".removeButton")) {
+            document.querySelector(".removeButton").remove();
+        }
+        const btn = document.createElement("input");
+        btn.setAttribute("type", "button");
+        btn.classList.add("removeButton");
+        btn.setAttribute("value", "Delete Project");
+        btn.setAttribute("data-btnid", `${projectID}`);
+
+        btn.addEventListener("click", () => {
+            if (projects.length === 1) {
+                alert("You need to have at least one project!");
+            } else {
+                if (confirm("Are you sure you want to delete this project?")) {
+                    removeProject(projectID);
+                    document
+                        .querySelector(`[data-projectid="${projectID}"]`)
+                        .remove();
+                    switchProjects(projects[0].id);
+                    save();
+                }
+            }
+        });
+
+        main.appendChild(btn);
+    }
 }
 
 //This Listens for when the user clicks outside of the card overlay and removes the overlay if he does
@@ -114,6 +161,8 @@ export {
     appendTodo,
     parseExistingTodos,
     switchProjects,
+    addRemoveButton,
+    loadCurrentId,
     addButton,
     taskInput,
     tasksDiv,

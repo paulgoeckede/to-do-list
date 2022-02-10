@@ -15,8 +15,10 @@ function newProject(name, id) {
     newText.innerHTML = name;
 
     newText.addEventListener("click", () => {
-        switchProjects(newText.getAttribute("data-projectid"));
+        switchProjects(id);
     });
+
+    console.log(projects);
 
     newListItem.appendChild(newText);
     projectList.insertBefore(newListItem, newProjectPlusLI);

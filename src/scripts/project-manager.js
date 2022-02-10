@@ -1,3 +1,4 @@
+import { currentProjectID } from "./dom-manager";
 import Project from "./project-class";
 
 const projects = [];
@@ -7,6 +8,11 @@ function addProject(name) {
     const newProject = new Project(name, projectIdCount++);
     projects.push(newProject);
     return newProject;
+}
+
+function removeProject(id) {
+    const projectIndex = projects.findIndex((project) => project.id == id);
+    projects.splice(projectIndex, 1);
 }
 
 function getProjectById(id) {
@@ -34,4 +40,12 @@ function load() {
     });
 }
 
-export { addProject, getProjectById, save, load, projectIdCount, projects };
+export {
+    addProject,
+    removeProject,
+    getProjectById,
+    save,
+    load,
+    projectIdCount,
+    projects,
+};

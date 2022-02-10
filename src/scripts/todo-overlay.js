@@ -165,10 +165,10 @@ function generateDueDate(todo) {
         const date = new Date(dateInput.valueAsDate);
         Projectmanager.getProjectById(currentProjectID).changeDue(
             todo.id,
-            date
+            format(date, "do MMM yyyy")
         ); //change due date in todo object array
         document.querySelector(`[data-dateindex = "${todo.id}"]`).innerHTML =
-            format(todo.due, "do MMM yyyy");
+            todo.due;
     });
 
     cardDue.appendChild(cardDueText);
