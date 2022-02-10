@@ -1,4 +1,3 @@
-import { currentProjectID } from "./dom-manager";
 import Project from "./project-class";
 
 const projects = [];
@@ -40,12 +39,4 @@ function load() {
     });
 }
 
-export {
-    addProject,
-    removeProject,
-    getProjectById,
-    save,
-    load,
-    projectIdCount,
-    projects,
-};
+export { addProject, removeProject, getProjectById, save, load, projects };

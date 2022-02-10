@@ -2,6 +2,7 @@ import * as Projectmanager from "./project-manager";
 import { currentProjectID } from "./dom-manager";
 import { format } from "date-fns";
 
+//generates the overlay view/card when a todo item is clicked
 export default function generateOverlay(todo) {
     document.getElementById("overlay").style.display = "block";
     const card = document.getElementById("overlay-item");
